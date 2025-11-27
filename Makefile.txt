@@ -1,0 +1,26 @@
+CC = gcc
+LEX = flex
+YACC = bison
+CFLAGS = -g
+
+all: url_validator
+
+url_validator: y.tab.c lex.yy.c
+	$(CC) $(CFLAGS) -o url_validator y.tab.c lex.yy.c
+
+y.tab.c: url_parser.y
+	$(YACC) -d url_parser.y
+
+lex.yy.c: url_lexer.l
+	$(LEX) url_lexer.l
+
+clean:
+	rm -f url_validator y.tab.c y.tab.h lex.yy.c
+
+test: url_validator
+	@echo "Testing URL validator:"
+	@echo "https://google.com/search" | ./url_validator
+	@echo "ftp://example.com" | ./url_validator
+	@echo "http://test-site.org/path/to/file" | ./url_validator
+
+.PHONY: all clean test

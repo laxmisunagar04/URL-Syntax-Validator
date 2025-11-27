@@ -1,0 +1,6 @@
+https://google.com/search
+http://example.com
+ftp://fileserver.com/documents
+https://sub.domain.co.uk/path/to/resource
+http://test-site.com
+https://api.service.io/v1/users
